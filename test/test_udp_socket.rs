@@ -36,8 +36,8 @@ impl Handler<usize, ()> for UdpHandler {
         match token {
             LISTENER => {
                 debug!("We are receiving a datagram now...");
-                self.listen_sock.read(&mut self.rx_buf.writer()).unwrap();
-                assert!(str::from_utf8(self.rx_buf.reader().bytes()).unwrap() == self.msg);
+                self.listen_sock.read(&mut self.rx_buf).unwrap();
+                assert!(str::from_utf8(self.rx_buf.bytes()).unwrap() == self.msg);
                 event_loop.shutdown();
             },
             _ => ()

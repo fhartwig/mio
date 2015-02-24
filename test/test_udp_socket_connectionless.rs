@@ -37,7 +37,7 @@ impl Handler<usize, ()> for UdpHandler {
         match token {
             LISTENER => {
                 debug!("We are receiving a datagram now...");
-                match self.listen_sock.recv_from(&mut self.rx_buf.writer()) {
+                match self.listen_sock.recv_from(&mut self.rx_buf) {
                     Ok(wouldblock) => {
                         match wouldblock.unwrap() {
                             SockAddr::InetAddr(ip, _) => {
@@ -50,7 +50,7 @@ impl Handler<usize, ()> for UdpHandler {
                         ret.unwrap();
                     }
                 }
-                assert!(str::from_utf8(self.rx_buf.reader().bytes()).unwrap() == self.msg);
+                assert!(str::from_utf8(self.rx_buf.bytes()).unwrap() == self.msg);
                 event_loop.shutdown();
             },
             _ => ()

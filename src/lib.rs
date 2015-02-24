@@ -160,8 +160,6 @@ pub mod buf {
         ByteBuf,
         MutByteBuf,
         RingBuf,
-        RingBufReader,
-        RingBufWriter,
         SliceBuf,
         MutSliceBuf,
     };
